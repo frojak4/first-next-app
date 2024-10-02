@@ -2,6 +2,7 @@ import React from 'react'
 import { getPost, getComments } from '@/app/utils/utils'
 import { Comment, Post } from '../../utils/types'
 import DisplayComment from '@/components/DisplayComment'
+import Layout from './Layout'
 
 type PostIDProps = {
     params: {
@@ -17,7 +18,9 @@ const PostID = async ({params}: PostIDProps) => {
     const comments: Comment[] = await getComments(params.id)
 
   return (
-    <div>
+    <Layout>
+    
+        
         <div className="w-4/5 mx-auto mt-2 bg-slate-600 text-center">
         <div className="text-white text-2xl">User ID: {post.userId}</div>
         <div>id: {post.id}</div>
@@ -29,7 +32,9 @@ const PostID = async ({params}: PostIDProps) => {
                 return <DisplayComment key={i} comment={comment}/>
             })}
         </div>
-    </div>
+        
+    
+    </Layout>
   )
 }
 
