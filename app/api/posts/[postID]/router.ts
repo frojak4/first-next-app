@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
-export async function GET(request: Request, context: any){
+export async function GET(request: Request, {params}: {params: {postID: string}}){
 
-    const {params} = context
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.postID}`, {cache: 'no-store'})
 
-    return NextResponse.json(params.postID)
+    if (!response.ok){
+        throw new Error('Could not fetch data')
+    }
+
+    const data = await response.json();
+
+    return NextResponse.json(data)
 }
